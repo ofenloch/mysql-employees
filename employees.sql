@@ -43,7 +43,8 @@ CREATE TABLE employees (
     birth_date  DATE            NOT NULL,
     first_name  VARCHAR(14)     NOT NULL,
     last_name   VARCHAR(16)     NOT NULL,
-    gender      ENUM ('M','F')  NOT NULL,    
+    middle_names VARCHAR(16)     NOT NULL DEFAULT '',
+    gender      ENUM ('D', 'M','F')  NOT NULL,    
     hire_date   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
 );
