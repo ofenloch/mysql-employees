@@ -97,9 +97,10 @@ CREATE TABLE salaries (
 ; 
 
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
-    SELECT emp_no, MAX(from_date) AS from_date, MAX(to_date) AS to_date
-    FROM dept_emp
-    GROUP BY emp_no;
+    SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
+    FROM dept_emp AS d, employees AS e
+    WHERE d.emp_no=e.emp_no
+    GROUP BY d.emp_no;
 
 # shows only the current department for each employee
 CREATE OR REPLACE VIEW current_dept_emp AS
