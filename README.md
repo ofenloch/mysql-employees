@@ -1,115 +1,67 @@
-# test_db
-A sample database with an integrated test suite, used to test your applications and database servers
+# Setting Up the Employees Sample Database
 
-This repository was migrated from [Launchpad](https://launchpad.net/test-db).
+* Clone the original project from GitHub <https://github.com/datacharmer/test_db.git>.
+* Rename the directory to employees.
+* Create your own git repository and push the files to it.
+* Rename the original README.md to README-original.md
+* Add this README.md
+* Delete the Sakila Test Database
+* Run `mysql < employees.sql` to install the database.
 
-See usage in the [MySQL docs](https://dev.mysql.com/doc/employee/en/index.html)
+```bash
+oofenloch@teben:~/workspaces/mysql$ git clone https://github.com/datacharmer/test_db.git
+Cloning into 'test_db'...
+remote: Enumerating objects: 105, done.
+remote: Total 105 (delta 0), reused 0 (delta 0), pack-reused 105
+Receiving objects: 100% (105/105), 74.27 MiB | 5.47 MiB/s, done.
+Resolving deltas: 100% (54/54), done.
+oofenloch@teben:~/workspaces/mysql$ mv test_db employees
+oofenloch@teben:~/workspaces/mysql$ cd employees/
+oofenloch@teben:~/workspaces/mysql/employees$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
 
-
-## Where it comes from
-
-The original data was created by Fusheng Wang and Carlo Zaniolo at 
-Siemens Corporate Research. The data is in XML format.
-http://timecenter.cs.aau.dk/software.htm
-
-Giuseppe Maxia made the relational schema and Patrick Crews exported
-the data in relational format.
-
-The database contains about 300,000 employee records with 2.8 million 
-salary entries. The export data is 167 MB, which is not huge, but
-heavy enough to be non-trivial for testing.
-
-The data was generated, and as such there are inconsistencies and subtle
-problems. Rather than removing them, we decided to leave the contents
-untouched, and use these issues as data cleaning exercises.
-
-## Prerequisites
-
-You need a MySQL database server (5.0+) and run the commands below through a 
-user that has the following privileges:
-
-    SELECT, INSERT, UPDATE, DELETE, 
-    CREATE, DROP, RELOAD, REFERENCES, 
-    INDEX, ALTER, SHOW DATABASES, 
-    CREATE TEMPORARY TABLES, 
-    LOCK TABLES, EXECUTE, CREATE VIEW
-
-## Installation:
-
-1. Download the repository
-2. Change directory to the repository
-
-Then run
-
-    mysql < employees.sql
-
-
-If you want to install with two large partitioned tables, run
-
-    mysql < employees_partitioned.sql
-
-
-## Testing the installation
-
-After installing, you can run one of the following
-
-    mysql -t < test_employees_md5.sql
-    # OR
-    mysql -t < test_employees_sha.sql
-
-For example:
-
-    mysql  -t < test_employees_md5.sql
-    +----------------------+
-    | INFO                 |
-    +----------------------+
-    | TESTING INSTALLATION |
-    +----------------------+
-    +--------------+------------------+----------------------------------+
-    | table_name   | expected_records | expected_crc                     |
-    +--------------+------------------+----------------------------------+
-    | employees    |           300024 | 4ec56ab5ba37218d187cf6ab09ce1aa1 |
-    | departments  |                9 | d1af5e170d2d1591d776d5638d71fc5f |
-    | dept_manager |               24 | 8720e2f0853ac9096b689c14664f847e |
-    | dept_emp     |           331603 | ccf6fe516f990bdaa49713fc478701b7 |
-    | titles       |           443308 | bfa016c472df68e70a03facafa1bc0a8 |
-    | salaries     |          2844047 | fd220654e95aea1b169624ffe3fca934 |
-    +--------------+------------------+----------------------------------+
-    +--------------+------------------+----------------------------------+
-    | table_name   | found_records    | found_crc                        |
-    +--------------+------------------+----------------------------------+
-    | employees    |           300024 | 4ec56ab5ba37218d187cf6ab09ce1aa1 |
-    | departments  |                9 | d1af5e170d2d1591d776d5638d71fc5f |
-    | dept_manager |               24 | 8720e2f0853ac9096b689c14664f847e |
-    | dept_emp     |           331603 | ccf6fe516f990bdaa49713fc478701b7 |
-    | titles       |           443308 | bfa016c472df68e70a03facafa1bc0a8 |
-    | salaries     |          2844047 | fd220654e95aea1b169624ffe3fca934 |
-    +--------------+------------------+----------------------------------+
-    +--------------+---------------+-----------+
-    | table_name   | records_match | crc_match |
-    +--------------+---------------+-----------+
-    | employees    | OK            | ok        |
-    | departments  | OK            | ok        |
-    | dept_manager | OK            | ok        |
-    | dept_emp     | OK            | ok        |
-    | titles       | OK            | ok        |
-    | salaries     | OK            | ok        |
-    +--------------+---------------+-----------+
-
-
-## DISCLAIMER
-
-To the best of my knowledge, this data is fabricated and
-it does not correspond to real people. 
-Any similarity to existing people is purely coincidental.
-
-
-## LICENSE
-This work is licensed under the 
-Creative Commons Attribution-Share Alike 3.0 Unported License. 
-To view a copy of this license, visit 
-http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to 
-Creative Commons, 171 Second Street, Suite 300, San Francisco, 
-California, 94105, USA.
-
-
+nothing to commit, working tree clean
+oofenloch@teben:~/workspaces/mysql/employees$ git remote rename origin old-origin
+oofenloch@teben:~/workspaces/mysql/employees$ git remote add origin https://teben.hopto.org:9080/mysql/employees.git
+oofenloch@teben:~/workspaces/mysql/employees$ git push -u origin --all
+Enumerating objects: 105, done.
+Counting objects: 100% (105/105), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (50/50), done.
+Writing objects: 100% (105/105), 74.27 MiB | 36.49 MiB/s, done.
+Total 105 (delta 54), reused 105 (delta 54)
+remote: Resolving deltas: 100% (54/54), done.
+To https://teben.hopto.org:9080/mysql/employees.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+oofenloch@teben:~/workspaces/mysql/employees$ git push -u origin --tags
+Everything up-to-date
+oofenloch@teben:~/workspaces/mysql/employees$ git mv README.md README-original.md 
+oofenloch@teben:~/workspaces/mysql/employees$ git rm -r sakila/
+rm 'sakila/README.md'
+rm 'sakila/sakila-mv-data.sql'
+rm 'sakila/sakila-mv-schema.sql'
+oofenloch@teben:~/workspaces/mysql/employees$ 
+oofenloch@teben:~/workspaces/mysql/employees$ mysql `cat ~/.mysql/oofenloch@localhost` < employees.sql 
+mysql: [Warning] Using a password on the command line interface can be insecure.
+INFO
+CREATING DATABASE STRUCTURE
+INFO
+storage engine: InnoDB
+INFO
+LOADING departments
+INFO
+LOADING employees
+INFO
+LOADING dept_emp
+INFO
+LOADING dept_manager
+INFO
+LOADING titles
+INFO
+LOADING salaries
+data_load_time_diff
+00:00:20
+oofenloch@teben:~/workspaces/mysql/employees$
+``
