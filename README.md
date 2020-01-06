@@ -3,7 +3,7 @@
 * Clone the original project from GitHub <https://github.com/datacharmer/test_db.git>.
 * Rename the directory to employees.
 * Create your own git repository and push the files to it.
-* Rename the original README.md to README-original.md
+* Rename the original [README.md](./README.md) to [README-original.md](./README-original.md)
 * Add this README.md
 * Delete the Sakila Test Database
 * Run `mysql < employees.sql` to install the database.

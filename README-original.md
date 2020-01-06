@@ -1,4 +1,7 @@
 # test_db
+
+**This is the original README.md download from <https://github.com/datacharmer/test_db> on January, 6, 2020. The current README is [here](./README.md).**
+
 A sample database with an integrated test suite, used to test your applications and database servers
 
 This repository was migrated from [Launchpad](https://launchpad.net/test-db).
