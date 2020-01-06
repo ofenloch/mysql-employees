@@ -7,6 +7,7 @@
 * Add this README.md
 * Delete the Sakila Test Database
 * Run `mysql < employees.sql` to install the database.
+* Run the test script: `./sql_test.sh 'mysql -uoofenloch -pFakePassword -P3307'`
 
 ```bash
 oofenloch@teben:~/workspaces/mysql$ git clone https://github.com/datacharmer/test_db.git
