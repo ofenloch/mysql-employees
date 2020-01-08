@@ -6,7 +6,7 @@
 * Rename the original [README.md](./README.md) to [README-original.md](./README-original.md)
 * Add this README.md
 * Delete the Sakila Test Database
-* Run `mysql < employees.sql` to install the database.
+* Run `mysql 'cat ~/.mysql/oofenloch@localhost' < employees.sql` to install the database.
 * Run the test script: `./sql_test.sh 'mysql -uoofenloch -pFakePassword -P3307'`
 
 ```bash
@@ -38,13 +38,13 @@ To https://teben.hopto.org:9080/mysql/employees.git
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 oofenloch@teben:~/workspaces/mysql/employees$ git push -u origin --tags
 Everything up-to-date
-oofenloch@teben:~/workspaces/mysql/employees$ git mv README.md README-original.md 
+oofenloch@teben:~/workspaces/mysql/employees$ git mv README.md README-original.md
 oofenloch@teben:~/workspaces/mysql/employees$ git rm -r sakila/
 rm 'sakila/README.md'
 rm 'sakila/sakila-mv-data.sql'
 rm 'sakila/sakila-mv-schema.sql'
-oofenloch@teben:~/workspaces/mysql/employees$ 
-oofenloch@teben:~/workspaces/mysql/employees$ mysql `cat ~/.mysql/oofenloch@localhost` < employees.sql 
+oofenloch@teben:~/workspaces/mysql/employees$
+oofenloch@teben:~/workspaces/mysql/employees$ mysql `cat ~/.mysql/oofenloch@localhost` < employees.sql
 mysql: [Warning] Using a password on the command line interface can be insecure.
 INFO
 CREATING DATABASE STRUCTURE
