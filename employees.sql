@@ -1,51 +1,60 @@
---  Sample employee database 
+--  Sample employee database
 --  See changelog table for details
 --  Copyright (C) 2007,2008, MySQL AB
---  
+--
 --  Original data created by Fusheng Wang and Carlo Zaniolo
 --  http://www.cs.aau.dk/TimeCenter/software.htm
 --  http://www.cs.aau.dk/TimeCenter/Data/employeeTemporalDataSet.zip
--- 
---  Current schema by Giuseppe Maxia 
+--
+--  Current schema by Giuseppe Maxia
 --  Data conversion from XML to relational by Patrick Crews
--- 
--- This work is licensed under the 
--- Creative Commons Attribution-Share Alike 3.0 Unported License. 
--- To view a copy of this license, visit 
--- http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to 
--- Creative Commons, 171 Second Street, Suite 300, San Francisco, 
+--
+-- This work is licensed under the
+-- Creative Commons Attribution-Share Alike 3.0 Unported License.
+-- To view a copy of this license, visit
+-- http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+-- Creative Commons, 171 Second Street, Suite 300, San Francisco,
 -- California, 94105, USA.
--- 
+--
 --  DISCLAIMER
 --  To the best of our knowledge, this data is fabricated, and
---  it does not correspond to real people. 
+--  it does not correspond to real people.
 --  Any similarity to existing people is purely coincidental.
--- 
+--
 
 DROP DATABASE IF EXISTS employees;
 CREATE DATABASE IF NOT EXISTS employees;
 USE employees;
+
+-- define some handy variables
+set @unknown_birth_date='1900-01-01';
+set @unknown_hire_date='1920-01-01';
+set @unknown_terminate_date='2222-01-01';
+set @unknown_end_of_probation='1920-07-01';
+set @begin_of_all_times='1000-01-01';
+set @end_of_all_times='9999-12-31';
 
 SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 
 DROP TABLE IF EXISTS dept_emp,
                      dept_manager,
                      titles,
-                     salaries, 
-                     employees, 
+                     salaries,
+                     employees,
                      departments;
 
 /*!50503 set default_storage_engine = InnoDB */;
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
-    emp_no      INT             NOT NULL,
-    birth_date  DATE            NOT NULL,
-    first_name  VARCHAR(14)     NOT NULL,
-    last_name   VARCHAR(16)     NOT NULL,
-    middle_names VARCHAR(16)     NOT NULL DEFAULT '',
-    gender      ENUM ('D', 'M','F')  NOT NULL,    
-    hire_date   DATE            NOT NULL,
+    emp_no       INT                 NOT NULL AUTO_INCREMENT,
+    birth_date   DATE                NOT NULL DEFAULT '1900-01-01',
+    first_name   VARCHAR(14)         NOT NULL,
+    last_name    VARCHAR(16)         NOT NULL,
+    middle_names VARCHAR(16)         NOT NULL DEFAULT '',
+    gender       ENUM ('D', 'M','F') NOT NULL DEFAULT 'D',
+    hire_date    DATE                NOT NULL DEFAULT '1920-01-01',
+    termination_date                 DATE NOT NULL DEFAULT '2222-01-01',
     PRIMARY KEY (emp_no)
 );
 
@@ -64,7 +73,7 @@ CREATE TABLE dept_manager (
    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no)
-); 
+);
 
 CREATE TABLE dept_emp (
     emp_no      INT             NOT NULL,
@@ -83,8 +92,8 @@ CREATE TABLE titles (
     to_date     DATE,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
-) 
-; 
+)
+;
 
 CREATE TABLE salaries (
     emp_no      INT             NOT NULL,
@@ -93,8 +102,8 @@ CREATE TABLE salaries (
     to_date     DATE            NOT NULL,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
-) 
-; 
+)
+;
 
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
