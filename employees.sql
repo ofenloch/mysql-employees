@@ -47,14 +47,14 @@ DROP TABLE IF EXISTS dept_emp,
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
-    emp_no       INT                 NOT NULL AUTO_INCREMENT,
-    birth_date   DATE                NOT NULL DEFAULT '1900-01-01',
-    first_name   VARCHAR(128)         NOT NULL,
-    last_name    VARCHAR(128)         NOT NULL,
-    middle_names VARCHAR(128)         NOT NULL DEFAULT '',
-    gender       ENUM ('D', 'M','F') NOT NULL DEFAULT 'D',
-    hire_date    DATE                NOT NULL DEFAULT '1920-01-01',
-    termination_date                 DATE NOT NULL DEFAULT '2222-01-01',
+    emp_no           INT                  NOT NULL AUTO_INCREMENT,
+    birth_date       DATE                 NOT NULL DEFAULT '1900-01-01',
+    first_name       VARCHAR(128)         NOT NULL,
+    last_name        VARCHAR(128)         NOT NULL,
+    middle_names     VARCHAR(128)         NOT NULL DEFAULT '',
+    gender           ENUM ('D', 'M','F')  NOT NULL DEFAULT 'D',
+    hire_date        DATE                 NOT NULL DEFAULT '1920-01-01',
+    termination_date DATE                 NOT NULL DEFAULT '2222-01-01',
     PRIMARY KEY (emp_no)
 );
 
