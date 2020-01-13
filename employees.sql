@@ -47,7 +47,8 @@ DROP TABLE IF EXISTS dept_emp,
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
-    emp_no           INT                  NOT NULL AUTO_INCREMENT,
+    emp_no           INT                  NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
+    employee_id      VARCHAR(64)          NOT NULL DEFAULT '' COMMENT 'customizable ID string for the employees, e.g. ETWeb-54321-GEWI, should be unique',
     birth_date       DATE                 NOT NULL DEFAULT '1900-01-01',
     first_name       VARCHAR(128)         NOT NULL,
     last_name        VARCHAR(128)         NOT NULL,
@@ -123,19 +124,19 @@ flush /*!50503 binary */ logs;
 
 
 SELECT 'NOT LOADING ANY DATA' as 'INFO';
--- SELECT 'LOADING departments' as 'INFO';
--- source load_departments.dump ;
--- SELECT 'LOADING employees' as 'INFO';
--- source load_employees.dump ;
--- SELECT 'LOADING dept_emp' as 'INFO';
--- source load_dept_emp.dump ;
--- SELECT 'LOADING dept_manager' as 'INFO';
--- source load_dept_manager.dump ;
--- SELECT 'LOADING titles' as 'INFO';
--- source load_titles.dump ;
--- SELECT 'LOADING salaries' as 'INFO';
--- source load_salaries1.dump ;
--- source load_salaries2.dump ;
--- source load_salaries3.dump ;
+SELECT 'LOADING departments' as 'INFO';
+source load_departments.dump ;
+SELECT 'LOADING employees' as 'INFO';
+source load_employees.dump ;
+SELECT 'LOADING dept_emp' as 'INFO';
+source load_dept_emp.dump ;
+SELECT 'LOADING dept_manager' as 'INFO';
+source load_dept_manager.dump ;
+SELECT 'LOADING titles' as 'INFO';
+source load_titles.dump ;
+SELECT 'LOADING salaries' as 'INFO';
+source load_salaries1.dump ;
+source load_salaries2.dump ;
+source load_salaries3.dump ;
 
 source show_elapsed.sql ;
