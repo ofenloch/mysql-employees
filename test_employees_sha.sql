@@ -61,7 +61,7 @@ SET @crc= '';
 
 INSERT INTO tchecksum 
     SELECT @crc := sha(CONCAT_WS('#',@crc,
-                emp_no,birth_date,first_name,last_name,gender,hire_date)) 
+                emp_no,date_of_birth,first_name,last_name,gender,date_of_hiring)) 
     FROM employees ORDER BY emp_no;
 INSERT INTO found_values VALUES ('employees', (SELECT COUNT(*) FROM employees), @crc,@crc);
 

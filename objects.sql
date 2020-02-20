@@ -116,8 +116,8 @@ AS
 SELECT
     emp_no,
     first_name , last_name ,
-    birth_date , gender,
-    hire_date,
+    date_of_birth , gender,
+    date_of_hiring,
     emp_dept_name(emp_no) as department
 from
     employees;

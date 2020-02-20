@@ -40,11 +40,11 @@ DROP TABLE IF EXISTS dept_emp,
 
 CREATE TABLE employees (
     emp_no      INT             NOT NULL,
-    birth_date  DATE            NOT NULL,
+    date_of_birth  DATE            NOT NULL,
     first_name  VARCHAR(14)     NOT NULL,
     last_name   VARCHAR(16)     NOT NULL,
     gender      ENUM ('M','F')  NOT NULL,    
-    hire_date   DATE            NOT NULL,
+    date_of_hiring   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
 );
 
