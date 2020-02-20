@@ -27,10 +27,10 @@ CREATE DATABASE IF NOT EXISTS employees;
 USE employees;
 
 -- define some handy variables
-set @unknown_birth_date='1900-01-01';
-set @unknown_hire_date='1920-01-01';
-set @unknown_terminate_date='2222-01-01';
-set @unknown_end_of_probation='1920-07-01';
+set @unknown_date_of_birth='1900-01-01';
+set @unknown_date_of_hiring='1920-01-01';
+set @unknown_date_of_terminate='2222-01-01';
+set @unknown_date_of_probation_end='1920-07-01';
 set @begin_of_all_times='1000-01-01';
 set @end_of_all_times='9999-12-31';
 
@@ -47,15 +47,16 @@ DROP TABLE IF EXISTS dept_emp,
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
-    emp_no           INT                  NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
-    employee_id      VARCHAR(64)          NOT NULL DEFAULT '' COMMENT 'customizable ID string for the employees, e.g. ETWeb-54321-GEWI, should be unique',
-    birth_date       DATE                 NOT NULL DEFAULT '1900-01-01',
-    first_name       VARCHAR(128)         NOT NULL,
-    last_name        VARCHAR(128)         NOT NULL,
-    middle_names     VARCHAR(128)         NOT NULL DEFAULT '',
-    gender           ENUM ('D', 'M','F')  NOT NULL DEFAULT 'D',
-    hire_date        DATE                 NOT NULL DEFAULT '1920-01-01',
-    termination_date DATE                 NOT NULL DEFAULT '2222-01-01',
+    emp_no                INT                  NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
+    employee_id           VARCHAR(64)          NOT NULL DEFAULT '' COMMENT 'customizable ID string for the employees, e.g. ETWeb-54321-GEWI, should be unique',
+    date_of_birth         DATE                 NOT NULL DEFAULT '1900-01-01',
+    first_name            VARCHAR(128)         NOT NULL,
+    last_name             VARCHAR(128)         NOT NULL,
+    middle_names          VARCHAR(128)         NOT NULL DEFAULT '',
+    gender                ENUM ('D', 'M','F')  NOT NULL DEFAULT 'D',
+    date_of_hiring        DATE                 NOT NULL DEFAULT '1920-01-01',
+    date_of_termination   DATE                 NOT NULL DEFAULT '2222-01-01',
+    date_of_probation_end DATE                 NOT NULL DEFAULT '1920-07-01',
     PRIMARY KEY (emp_no)
 );
 
