@@ -68,8 +68,10 @@ CREATE TABLE departments (
 );
 
 CREATE TABLE dept_manager (
-   emp_no       INT             NOT NULL,
-   dept_no      CHAR(4)         NOT NULL,
+   -- emp_no       INT             NOT NULL,
+   emp_no       INT             NOT NULL REFERENCES employees(emp_no),
+   -- dept_no      CHAR(4)         NOT NULL,
+   dept_no      CHAR(4)         NOT NULL REFERENCES departments(dept_no),
    from_date    DATE            NOT NULL,
    to_date      DATE            NOT NULL,
    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
@@ -78,8 +80,10 @@ CREATE TABLE dept_manager (
 );
 
 CREATE TABLE dept_emp (
-    emp_no      INT             NOT NULL,
-    dept_no     CHAR(4)         NOT NULL,
+    -- emp_no      INT             NOT NULL,
+    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    -- dept_no     CHAR(4)         NOT NULL,
+    dept_no     CHAR(4)         NOT NULL REFERENCES departments(dept_no),
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
     FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no)  ON DELETE CASCADE,
@@ -88,7 +92,8 @@ CREATE TABLE dept_emp (
 );
 
 CREATE TABLE titles (
-    emp_no      INT             NOT NULL,
+    -- emp_no      INT             NOT NULL,
+    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
     title       VARCHAR(50)     NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE,
@@ -98,7 +103,8 @@ CREATE TABLE titles (
 ;
 
 CREATE TABLE salaries (
-    emp_no      INT             NOT NULL,
+    -- emp_no      INT             NOT NULL,
+    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
     salary      INT             NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
