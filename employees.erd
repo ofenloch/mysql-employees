@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagram version="1" name="employees-1.erd">
+<diagram version="1" name="mysql_employees.erd">
 	<entities>
-		<data-source id="mysql8-16c467d995d-636c574b72363148">
-			<entity id="1" name="current_dept_emp" fq-name="employees.current_dept_emp" order="0" x="40" y="540">
-				<path name="employees"/>
+		<data-source id="mysql5-16cf104248e-6b2a1b78926c8d58">
+			<entity id="1" name="current_dept_emp" fq-name="mysql_employees.current_dept_emp" order="0" x="160" y="600">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="2" name="departments" fq-name="employees.departments" order="1" x="620" y="360">
-				<path name="employees"/>
+			<entity id="2" name="departments" fq-name="mysql_employees.departments" order="1" x="920" y="360">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="3" name="dept_emp" fq-name="employees.dept_emp" order="2" x="780" y="360">
-				<path name="employees"/>
+			<entity id="3" name="dept_emp" fq-name="mysql_employees.dept_emp" order="2" x="940" y="80">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="4" name="dept_emp_latest_date" fq-name="employees.dept_emp_latest_date" order="3" x="220" y="540">
-				<path name="employees"/>
+			<entity id="4" name="dept_emp_latest_date" fq-name="mysql_employees.dept_emp_latest_date" order="3" x="600" y="520">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="5" name="dept_manager" fq-name="employees.dept_manager" order="4" x="440" y="360">
-				<path name="employees"/>
+			<entity id="5" name="dept_manager" fq-name="mysql_employees.dept_manager" order="4" x="680" y="340">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="6" name="employees" fq-name="employees.employees" order="5" x="520" y="22">
-				<path name="employees"/>
+			<entity id="6" name="employees" fq-name="mysql_employees.employees" order="5" x="500" y="20">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="7" name="salaries" fq-name="employees.salaries" order="6" border-width="3" x="120" y="60">
-				<path name="employees"/>
+			<entity id="7" name="salaries" fq-name="mysql_employees.salaries" order="6" x="200" y="60">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="8" name="titles" fq-name="employees.titles" order="7" x="120" y="240">
-				<path name="employees"/>
+			<entity id="8" name="salary_groups" fq-name="mysql_employees.salary_groups" order="7" x="460" y="400">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="9" name="sg_emp" fq-name="employees.sg_emp" order="8" x="820" y="60">
-				<path name="employees"/>
+			<entity id="9" name="sg_emp" fq-name="mysql_employees.sg_emp" order="8" x="200" y="380">
+				<path name="mysql_employees"/>
 			</entity>
-			<entity id="10" name="salary_groups" fq-name="employees.salary_groups" order="9" x="820" y="240">
-				<path name="employees"/>
+			<entity id="10" name="titles" fq-name="mysql_employees.titles" order="9" x="200" y="240">
+				<path name="mysql_employees"/>
 			</entity>
 		</data-source>
 	</entities>
 	<relations>
-		<relation name="dept_emp_ibfk_2" fq-name="employees.dept_emp.dept_emp_ibfk_2" type="fk" pk-ref="2" fk-ref="3"/>
-		<relation name="dept_manager_ibfk_2" fq-name="employees.dept_manager.dept_manager_ibfk_2" type="fk" pk-ref="2" fk-ref="5"/>
-		<relation name="dept_emp_ibfk_1" fq-name="employees.dept_emp.dept_emp_ibfk_1" type="fk" pk-ref="6" fk-ref="3"/>
-		<relation name="dept_manager_ibfk_1" fq-name="employees.dept_manager.dept_manager_ibfk_1" type="fk" pk-ref="6" fk-ref="5"/>
-		<relation name="salaries_ibfk_1" fq-name="employees.salaries.salaries_ibfk_1" type="fk" pk-ref="6" fk-ref="7"/>
-		<relation name="titles_ibfk_1" fq-name="employees.titles.titles_ibfk_1" type="fk" pk-ref="6" fk-ref="8"/>
-		<relation name="sg_emp_ibfk_1" fq-name="employees.sg_emp.sg_emp_ibfk_1" type="fk" pk-ref="6" fk-ref="9"/>
-		<relation name="sg_emp_ibfk_2" fq-name="employees.sg_emp.sg_emp_ibfk_2" type="fk" pk-ref="10" fk-ref="9"/>
+		<relation name="dept_emp_ibfk_2" fq-name="mysql_employees.dept_emp.dept_emp_ibfk_2" type="fk" pk-ref="2" fk-ref="3"/>
+		<relation name="dept_manager_ibfk_2" fq-name="mysql_employees.dept_manager.dept_manager_ibfk_2" type="fk" pk-ref="2" fk-ref="5"/>
+		<relation name="dept_emp_ibfk_1" fq-name="mysql_employees.dept_emp.dept_emp_ibfk_1" type="fk" pk-ref="6" fk-ref="3"/>
+		<relation name="dept_manager_ibfk_1" fq-name="mysql_employees.dept_manager.dept_manager_ibfk_1" type="fk" pk-ref="6" fk-ref="5"/>
+		<relation name="salaries_ibfk_1" fq-name="mysql_employees.salaries.salaries_ibfk_1" type="fk" pk-ref="6" fk-ref="7"/>
+		<relation name="sg_emp_ibfk_1" fq-name="mysql_employees.sg_emp.sg_emp_ibfk_1" type="fk" pk-ref="6" fk-ref="9"/>
+		<relation name="titles_ibfk_1" fq-name="mysql_employees.titles.titles_ibfk_1" type="fk" pk-ref="6" fk-ref="10"/>
+		<relation name="sg_emp_ibfk_2" fq-name="mysql_employees.sg_emp.sg_emp_ibfk_2" type="fk" pk-ref="8" fk-ref="9"/>
 	</relations>
 </diagram>
