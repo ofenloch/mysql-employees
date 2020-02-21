@@ -6,7 +6,8 @@ A sample database with an integrated test suite, used to test your applications 
 
 This repository was migrated from [Launchpad](https://launchpad.net/test-db).
 
-See usage in the [MySQL docs](https://dev.mysql.com/doc/employee/en/index.html)
+See more details in the [original docs](https://dev.mysql.com/doc/employee/en/index.html). A PDF "print out" of 
+the [original docs](https://dev.mysql.com/doc/employee/en/index.html) is found in file *employee-en.a4.pdf*.
 
 
 ## Where it comes from
