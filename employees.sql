@@ -34,7 +34,7 @@ set @unknown_date_of_probation_end='1920-07-01';
 set @begin_of_all_times='1000-01-01';
 set @end_of_all_times='9999-12-31';
 
-SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
+SELECT '*** CREATING DATABASE STRUCTURE ...' as 'INFO';
 
 DROP TABLE IF EXISTS dept_emp,
                      dept_manager,
@@ -130,18 +130,18 @@ CREATE OR REPLACE VIEW current_dept_emp AS
 flush /*!50503 binary */ logs;
 
 
-SELECT 'NOT LOADING ANY DATA' as 'INFO';
+SELECT '*** LOADING DATA ...' as 'INFO';
 SELECT 'LOADING departments' as 'INFO';
 source load_departments.dump ;
-SELECT 'LOADING employees' as 'INFO';
+SELECT ' * LOADING employees' as 'INFO';
 source load_employees.dump ;
-SELECT 'LOADING dept_emp' as 'INFO';
+SELECT ' * LOADING dept_emp' as 'INFO';
 source load_dept_emp.dump ;
-SELECT 'LOADING dept_manager' as 'INFO';
+SELECT ' * LOADING dept_manager' as 'INFO';
 source load_dept_manager.dump ;
-SELECT 'LOADING titles' as 'INFO';
+SELECT ' * LOADING titles' as 'INFO';
 source load_titles.dump ;
-SELECT 'LOADING salaries' as 'INFO';
+SELECT ' * LOADING salaries' as 'INFO';
 source load_salaries1.dump ;
 source load_salaries2.dump ;
 source load_salaries3.dump ;
