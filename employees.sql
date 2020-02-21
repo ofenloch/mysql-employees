@@ -113,6 +113,26 @@ CREATE TABLE salaries (
 )
 ;
 
+CREATE TABLE salary_groups (
+    sg_no       INT             NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
+    sg_name     VARCHAR(40)     NOT NULL COMMENT 'name of the salary group, e.g. EG 12',
+    PRIMARY     KEY (sg_no),
+    UNIQUE      KEY (sg_name)
+)
+;
+
+CREATE TABLE sg_emp (
+    -- emp_no      INT             NOT NULL,
+    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    -- dept_no     CHAR(4)         NOT NULL,
+    sg_no       INT             NOT NULL REFERENCES salary_groups(sg_no),
+    from_date   DATE            NOT NULL,
+    to_date     DATE            NOT NULL,
+    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)  ON DELETE CASCADE,
+    FOREIGN KEY (sg_no)   REFERENCES salary_groups (sg_no) ON DELETE CASCADE,
+    PRIMARY KEY (emp_no,sg_no, from_date)
+);
+
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
     FROM dept_emp AS d, employees AS e
