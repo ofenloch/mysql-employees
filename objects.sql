@@ -1,4 +1,4 @@
-use employees;
+use mysql_employees;
 
 delimiter //
 drop function if exists emp_dept_id //
