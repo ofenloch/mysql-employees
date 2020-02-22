@@ -135,6 +135,21 @@ CREATE TABLE sg_emp (
     PRIMARY KEY (emp_no,sg_no, from_date)
 );
 
+--
+-- table definition and data taken from https://gist.github.com/adhipg/1600028
+--
+CREATE TABLE IF NOT EXISTS `country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iso` char(2) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `nicename` varchar(80) NOT NULL,
+  `iso3` char(3) DEFAULT NULL,
+  `numcode` smallint(6) DEFAULT NULL,
+  `phonecode` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+;
+
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
     FROM dept_emp AS d, employees AS e
@@ -169,5 +184,8 @@ source load_salaries2.dump ;
 source load_salaries3.dump ;
 SELECT ' * LOADING salary groups' as 'INFO';
 source load_salary_groups.dump ;
+SELECT ' * LOADING countries' as 'INFO';
+source load_countries.dump ;
+
 
 source show_elapsed.sql ;
