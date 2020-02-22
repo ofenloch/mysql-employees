@@ -1,2 +1,8 @@
 # ignore gea* files in the entire tree
+GEA*
 gea*
+GEWI*
+gewi*
+
+# ignore log files
+*.log
