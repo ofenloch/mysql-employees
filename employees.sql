@@ -96,7 +96,7 @@ CREATE TABLE titles (
     emp_no      INT             NOT NULL REFERENCES employees(emp_no),
     title       VARCHAR(50)     NOT NULL,
     from_date   DATE            NOT NULL,
-    to_date     DATE,
+    to_date     DATE            NOT NULL,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
 )
@@ -116,15 +116,17 @@ CREATE TABLE salaries (
 CREATE TABLE salary_groups (
     sg_no       INT             NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
     sg_name     VARCHAR(40)     NOT NULL COMMENT 'name of the salary group, e.g. EG 12',
-    PRIMARY     KEY (sg_no),
-    UNIQUE      KEY (sg_name)
+    base_salary FLOAT           NOT NULL COMMENT 'monthly base salary for 35h week',
+    from_date   DATE            NOT NULL COMMENT 'begin of validity',
+    to_date     DATE            NOT NULL COMMENT 'end of validity',
+    PRIMARY     KEY (sg_no, from_date)
 )
 ;
 
 CREATE TABLE sg_emp (
     -- emp_no      INT             NOT NULL,
     emp_no      INT             NOT NULL REFERENCES employees(emp_no),
-    -- dept_no     CHAR(4)         NOT NULL,
+    -- sg_no       INT             NOT NULL,
     sg_no       INT             NOT NULL REFERENCES salary_groups(sg_no),
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
