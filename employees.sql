@@ -36,13 +36,6 @@ set @end_of_all_times='9999-12-31';
 
 SELECT '*** CREATING DATABASE STRUCTURE ...' as 'INFO';
 
-DROP TABLE IF EXISTS dept_emp,
-                     dept_manager,
-                     title,
-                     salary,
-                     employee,
-                     department;
-
 /*!50503 set default_storage_engine = InnoDB */;
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
