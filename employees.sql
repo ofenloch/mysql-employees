@@ -70,7 +70,8 @@ CREATE TABLE dept_manager (
    FOREIGN KEY (emp_no)  REFERENCES employee (emp_no)    ON DELETE CASCADE,
    FOREIGN KEY (dept_no) REFERENCES department (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no, from_date)
-);
+) COMMENT 'Each department has a boss (who is an employee)'
+;
 
 CREATE TABLE dept_emp (
     -- emp_no      INT             NOT NULL,
@@ -82,7 +83,8 @@ CREATE TABLE dept_emp (
     FOREIGN KEY (emp_no)  REFERENCES employee   (emp_no)  ON DELETE CASCADE,
     FOREIGN KEY (dept_no) REFERENCES department (dept_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,dept_no, from_date)
-);
+) COMMENT 'Map the employee to his department'
+;
 
 CREATE TABLE titles (
     -- emp_no      INT             NOT NULL,
@@ -103,7 +105,7 @@ CREATE TABLE salary (
     to_date     DATE            NOT NULL DEFAULT '9999-12-31',
     FOREIGN KEY (emp_no) REFERENCES employee (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
-)
+) COMMENT 'Map the employyee to his salary, we need this table because the actual salary depends on mor than the salary gruoup'
 ;
 
 CREATE TABLE salary_group (
@@ -126,7 +128,8 @@ CREATE TABLE sg_emp (
     FOREIGN KEY (emp_no)  REFERENCES employee (emp_no)  ON DELETE CASCADE,
     FOREIGN KEY (sg_no)   REFERENCES salary_group (sg_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,sg_no, from_date)
-);
+) COMMENT 'Map the employee to his salary group'
+;
 
 --
 -- table definition and data taken from https://gist.github.com/adhipg/1600028
@@ -153,7 +156,18 @@ CREATE TABLE IF NOT EXISTS `region` (
   PRIMARY KEY (`id`)
 ) COMMENT 'regions and their names, e.g. BaWü as Baden-Württemberg or IG Metall tariff districts like Küste, ..'
 ;
- 
+
+CREATE TABLE region_emp (
+    emp_no      INT             NOT NULL REFERENCES employee(emp_no),
+    region_id   INT             NOT NULL REFERENCES region(id),
+    from_date   DATE            NOT NULL,
+    to_date     DATE            NOT NULL DEFAULT '9999-12-31',
+    FOREIGN KEY (emp_no)  REFERENCES employee (emp_no)  ON DELETE CASCADE,
+    FOREIGN KEY (region_id)   REFERENCES region (id) ON DELETE CASCADE,
+    PRIMARY KEY (emp_no,region_id, from_date)
+) COMMENT 'Map employee to his region (we get his country via the region)'
+;
+
 
 
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
