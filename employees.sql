@@ -138,7 +138,7 @@ CREATE TABLE sg_emp (
 --
 -- table definition and data taken from https://gist.github.com/adhipg/1600028
 --
-CREATE TABLE IF NOT EXISTS `country` (
+CREATE TABLE IF NOT EXISTS `countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `iso` char(2) NOT NULL,
   `name` varchar(80) NOT NULL,
