@@ -1,0 +1,33 @@
+INSERT INTO `regions` (`id`, `name`, `nicename`, `country`) VALUES
+--
+-- https://de.wikipedia.org/wiki/IG_Metall
+-- Die IG Metall ist in sieben Bezirke untergliedert: Küste, Baden-Württemberg, Bayern, 
+-- Berlin-Brandenburg-Sachsen, Mitte (ehemals Bezirk Frankfurt; umfasst die Länder Hessen, 
+-- Rheinland-Pfalz, Saarland und Thüringen), Niedersachsen-Sachsen-Anhalt sowie Nordrhein-Westfalen.
+--
+(1, 'Küste', 'IG Metall Bezirk Küste', 80),
+(2, 'Baden-Württemberg', 'IG Metall Bezirk Baden-Württemberg', 80),
+(3, 'Bayern', 'IG Metall Bezirk Bayern', 80),
+(4, 'Berlin-Brandenburg-Sachsen', 'IG Metall Bezirk Berlin-Brandenburg-Sachsen', 80),
+(5, 'Mitte', 'IG Metall Bezirk Mitte', 80),
+(6, 'Niedersachsen-Sachsen-Anhalt', 'IG Metall Bezirk Niedersachsen-Sachsen-Anhalt', 80),
+(7, 'Nordrhein-Westfalen', 'IG Metall Bezirk Nordrhein-Westfalen', 80),
+--
+-- Bundesländer der BRD
+--
+(8, 'BW', 'Baden-Württemberg', 80),
+(9, 'BY', 'Bayern', 80),
+(10, 'BE', 'Berlin', 80),
+(11, 'BB', 'Brandenburg', 80),
+(12, 'HB', 'Bremen', 80),
+(13, 'HH', 'Hamburg', 80),
+(14, 'HE', 'Hessen', 80),
+(15, 'MV', 'Mecklenburg-Vorpommern', 80),
+(16, 'NI', 'Niedersachsen', 80),
+(17, 'NW', 'Nordrhein-Westfalen', 80),
+(18, 'RP', 'Rheinland-Pfalz', 80),
+(19, 'SL', 'Saarland', 80),
+(20, 'SN', 'Sachsen', 80),
+(21, 'ST', 'Sachsen-Anhalt', 80),
+(22, 'SH', 'Schleswig-Holstein', 80),
+(23, 'TH', 'Thüringen', 80);

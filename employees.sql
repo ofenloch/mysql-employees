@@ -150,6 +150,19 @@ CREATE TABLE IF NOT EXISTS `countries` (
 )
 ;
 
+CREATE TABLE IF NOT EXISTS `regions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  `nicename` varchar(80) NOT NULL,
+  `note` varchar(512) NOT NULL DEFAULT '',
+  `country` int(11) NOT NULL  REFERENCES countries(`id`),
+  FOREIGN KEY (`country`)  REFERENCES countries (`id`)  ON DELETE CASCADE,
+  PRIMARY KEY (`id`)
+) COMMENT 'regions and their names, e.g. BaWü as Baden-Württemberg or IG Metall tariff districts like Küste, ..'
+;
+ 
+
+
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
     FROM dept_emp AS d, employees AS e
@@ -186,6 +199,8 @@ SELECT ' * LOADING salary groups' as 'INFO';
 source load_salary_groups.dump ;
 SELECT ' * LOADING countries' as 'INFO';
 source load_countries.dump ;
+SELECT ' * LOADING regions' as 'INFO';
+source load_regions.dump ;
 
 
 source show_elapsed.sql ;
