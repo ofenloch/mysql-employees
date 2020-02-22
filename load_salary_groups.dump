@@ -1,4 +1,4 @@
-INSERT INTO `salary_groups` (`sg_name`, `base_salary`, `from_date`) VALUES
+INSERT INTO `salary_group` (`sg_name`, `base_salary`, `from_date`) VALUES
 ('EG 1',  2398.00, '2018-04-01'),
 ('EG 2',  2463.00, '2018-04-01'),
 ('EG 3',  2592.50, '2018-04-01'),

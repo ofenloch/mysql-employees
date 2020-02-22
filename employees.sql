@@ -38,15 +38,15 @@ SELECT '*** CREATING DATABASE STRUCTURE ...' as 'INFO';
 
 DROP TABLE IF EXISTS dept_emp,
                      dept_manager,
-                     titles,
-                     salaries,
-                     employees,
-                     departments;
+                     title,
+                     salary,
+                     employee,
+                     department;
 
 /*!50503 set default_storage_engine = InnoDB */;
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
-CREATE TABLE employees (
+CREATE TABLE employee (
     emp_no                INT                  NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
     employee_id           VARCHAR(64)          NOT NULL DEFAULT '' COMMENT 'customizable ID string for the employees, e.g. ETWeb-54321-GEWI, should be unique',
     date_of_birth         DATE                 NOT NULL DEFAULT '1900-01-01',
@@ -60,7 +60,7 @@ CREATE TABLE employees (
     PRIMARY KEY (emp_no)
 );
 
-CREATE TABLE departments (
+CREATE TABLE department (
     dept_no     CHAR(4)         NOT NULL,
     dept_name   VARCHAR(40)     NOT NULL,
     PRIMARY KEY (dept_no),
@@ -69,51 +69,51 @@ CREATE TABLE departments (
 
 CREATE TABLE dept_manager (
    -- emp_no       INT             NOT NULL,
-   emp_no       INT             NOT NULL REFERENCES employees(emp_no),
+   emp_no       INT             NOT NULL REFERENCES employee(emp_no),
    -- dept_no      CHAR(4)         NOT NULL,
    dept_no      CHAR(4)         NOT NULL REFERENCES departments(dept_no),
    from_date    DATE            NOT NULL,
    to_date      DATE            NOT NULL DEFAULT '9999-12-31',
-   FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
-   FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
+   FOREIGN KEY (emp_no)  REFERENCES employee (emp_no)    ON DELETE CASCADE,
+   FOREIGN KEY (dept_no) REFERENCES department (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no, from_date)
 );
 
 CREATE TABLE dept_emp (
     -- emp_no      INT             NOT NULL,
-    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    emp_no      INT             NOT NULL REFERENCES employee(emp_no),
     -- dept_no     CHAR(4)         NOT NULL,
-    dept_no     CHAR(4)         NOT NULL REFERENCES departments(dept_no),
+    dept_no     CHAR(4)         NOT NULL REFERENCES department(dept_no),
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL DEFAULT '9999-12-31',
-    FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no)  ON DELETE CASCADE,
-    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
+    FOREIGN KEY (emp_no)  REFERENCES employee   (emp_no)  ON DELETE CASCADE,
+    FOREIGN KEY (dept_no) REFERENCES department (dept_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,dept_no, from_date)
 );
 
 CREATE TABLE titles (
     -- emp_no      INT             NOT NULL,
-    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    emp_no      INT             NOT NULL REFERENCES employee(emp_no),
     title       VARCHAR(50)     NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL DEFAULT '9999-12-31',
-    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
+    FOREIGN KEY (emp_no) REFERENCES employee (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
 )
 ;
 
-CREATE TABLE salaries (
+CREATE TABLE salary (
     -- emp_no      INT             NOT NULL,
-    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    emp_no      INT             NOT NULL REFERENCES employee(emp_no),
     salary      INT             NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL DEFAULT '9999-12-31',
-    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
+    FOREIGN KEY (emp_no) REFERENCES employee (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
 )
 ;
 
-CREATE TABLE salary_groups (
+CREATE TABLE salary_group (
     sg_no       INT             NOT NULL AUTO_INCREMENT COMMENT 'internal numeric unique id, used as primary key',
     sg_name     VARCHAR(40)     NOT NULL COMMENT 'name of the salary group, e.g. EG 12',
     base_salary FLOAT           NOT NULL COMMENT 'monthly base salary for 35h week',
@@ -125,20 +125,20 @@ CREATE TABLE salary_groups (
 
 CREATE TABLE sg_emp (
     -- emp_no      INT             NOT NULL,
-    emp_no      INT             NOT NULL REFERENCES employees(emp_no),
+    emp_no      INT             NOT NULL REFERENCES employee(emp_no),
     -- sg_no       INT             NOT NULL,
-    sg_no       INT             NOT NULL REFERENCES salary_groups(sg_no),
+    sg_no       INT             NOT NULL REFERENCES salary_group(sg_no),
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL DEFAULT '9999-12-31',
-    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)  ON DELETE CASCADE,
-    FOREIGN KEY (sg_no)   REFERENCES salary_groups (sg_no) ON DELETE CASCADE,
+    FOREIGN KEY (emp_no)  REFERENCES employee (emp_no)  ON DELETE CASCADE,
+    FOREIGN KEY (sg_no)   REFERENCES salary_group (sg_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,sg_no, from_date)
 );
 
 --
 -- table definition and data taken from https://gist.github.com/adhipg/1600028
 --
-CREATE TABLE IF NOT EXISTS `countries` (
+CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `iso` char(2) NOT NULL,
   `name` varchar(80) NOT NULL,
@@ -150,13 +150,13 @@ CREATE TABLE IF NOT EXISTS `countries` (
 )
 ;
 
-CREATE TABLE IF NOT EXISTS `regions` (
+CREATE TABLE IF NOT EXISTS `region` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
   `nicename` varchar(80) NOT NULL,
   `note` varchar(512) NOT NULL DEFAULT '',
-  `country` int(11) NOT NULL  REFERENCES countries(`id`),
-  FOREIGN KEY (`country`)  REFERENCES countries (`id`)  ON DELETE CASCADE,
+  `country` int(11) NOT NULL  REFERENCES country(`id`),
+  FOREIGN KEY (`country`)  REFERENCES country (`id`)  ON DELETE CASCADE,
   PRIMARY KEY (`id`)
 ) COMMENT 'regions and their names, e.g. BaWü as Baden-Württemberg or IG Metall tariff districts like Küste, ..'
 ;
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `regions` (
 
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT d.emp_no, e.last_name, e.first_name, MAX(from_date) AS from_date, MAX(to_date) AS to_date
-    FROM dept_emp AS d, employees AS e
+    FROM dept_emp AS d, employee AS e
     WHERE d.emp_no=e.emp_no
     GROUP BY d.emp_no;
 

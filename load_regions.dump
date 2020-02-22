@@ -1,4 +1,4 @@
-INSERT INTO `regions` (`id`, `name`, `nicename`, `country`) VALUES
+INSERT INTO `region` (`id`, `name`, `nicename`, `country`) VALUES
 --
 -- https://de.wikipedia.org/wiki/IG_Metall
 -- Die IG Metall ist in sieben Bezirke untergliedert: Küste, Baden-Württemberg, Bayern, 
